@@ -59,20 +59,12 @@ static double F(double x, double y) {
 #define Y_MIN  -1.1
 
 static void draw(FILE *stream, struct canvas_size canvas_size) {
-    const double x_scale = (double)canvas_size.width / (X_MAX - X_MIN);
-    const double x_start = -(double)canvas_size.width / 2;
-    const double x_stop  = -x_start;
+    const double x_step = (X_MAX - X_MIN) / (double)(canvas_size.width - 1);
+    const double y_step = (Y_MAX - Y_MIN) / (double)(canvas_size.height - 1);
 
-    const double y_scale = (double)canvas_size.height / (Y_MAX - Y_MIN);
-    const double y_start = (double)canvas_size.height * Y_MAX / (Y_MAX - Y_MIN);
-    const double y_stop  = (double)canvas_size.height * Y_MIN / (Y_MAX - Y_MIN);
-
-    for (double y1 = y_start; y1 > y_stop; y1--) {
-        const double y = y1 / y_scale;
-        for (double x1 = x_start; x1 < x_stop; x1++) {
-            const double x = x1 / x_scale;
+    for (double y = Y_MAX; y > Y_MIN; y -= y_step) {
+        for (double x = X_MIN; x < X_MAX; x += x_step)
             fputc(F(x, y) <= 0 ? '@' : ' ', stream);
-        }
         fputc('\n', stream);
     }
 }

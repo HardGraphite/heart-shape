@@ -18,19 +18,14 @@ def draw(stream: TextIO, size: tuple[int, int] | None):
     else:
         width, height = size
 
-    x_scale = width / (X_MAX - X_MIN)
-    x_start = -width / 2
-    x_stop = -x_start
-
-    y_scale = height / (Y_MAX - Y_MIN)
-    y_start = height * Y_MAX / (Y_MAX - Y_MIN)
-    y_stop = height * Y_MIN / (Y_MAX - Y_MIN)
+    x_step = (X_MAX - X_MIN) / (width - 1)
+    y_step = (Y_MIN - Y_MAX) / (height - 1)
 
     buffer = []
-    for y in range(int(y_start * 100), int(y_stop * 100), -100):
-        y = y / 100 / y_scale
-        for x in range(int(x_start * 100), int(x_stop * 100), 100):
-            x = x / 100 / x_scale
+    for y in range(int(Y_MAX * 1e3), int(Y_MIN * 1e3), int(y_step * 1e3)):
+        y /= 1e3
+        for x in range(int(X_MIN * 1e3), int(X_MAX * 1e3), int(x_step * 1e3)):
+            x /= 1e3
             buffer.append('@' if F(x, y) <= 0 else ' ')
         print(*buffer, sep='', file=stream)
         buffer.clear()
