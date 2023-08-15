@@ -1,7 +1,8 @@
 BUILD_DIR ?= build
 
 CC ?= gcc
-LATEX = pdflatex
+LATEX ?= pdflatex
+LUA ?= lua
 PYTHON ?= python
 
 ALL_SRC = $(wildcard heart*.*)
@@ -30,6 +31,9 @@ heart_latex: ${BUILD_DIR}/heart_latex.pdf
 ${BUILD_DIR}/heart_latex.pdf: heart_latex.tex ${BUILD_DIR}
 	${LATEX} -interaction=nonstopmode -file-line-error \
 		-output-directory="$(dir $@)" "$<"
+
+heart_lua: heart_lua.lua
+	${LUA} $<
 
 heart_python: heart_python.py
 	${PYTHON} $<
