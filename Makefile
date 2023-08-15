@@ -1,6 +1,7 @@
 BUILD_DIR ?= build
 
 CC ?= gcc
+EMACS ?= emacs
 LATEX ?= pdflatex
 LUA ?= lua
 PYTHON ?= python
@@ -24,6 +25,9 @@ heart_c: ${BUILD_DIR}/heart_c
 
 ${BUILD_DIR}/heart_c: heart_c.c ${BUILD_DIR}
 	${CC} -Wall -Wextra -O1 -s $< -o $@
+
+heart_elisp: heart_elisp.el
+	${EMACS} --batch --load $<
 
 heart_latex: ${BUILD_DIR}/heart_latex.pdf
 	xdg-open $<
