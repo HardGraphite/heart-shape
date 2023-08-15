@@ -1,6 +1,7 @@
 BUILD_DIR ?= build
 
 CC ?= gcc
+LATEX = pdflatex
 PYTHON ?= python
 
 ALL_SRC = $(wildcard heart*.*)
@@ -22,6 +23,13 @@ heart_c: ${BUILD_DIR}/heart_c
 
 ${BUILD_DIR}/heart_c: heart_c.c ${BUILD_DIR}
 	${CC} -Wall -Wextra -O1 -s $< -o $@
+
+heart_latex: ${BUILD_DIR}/heart_latex.pdf
+	xdg-open $<
+
+${BUILD_DIR}/heart_latex.pdf: heart_latex.tex ${BUILD_DIR}
+	${LATEX} -interaction=nonstopmode -file-line-error \
+		-output-directory="$(dir $@)" "$<"
 
 heart_python: heart_python.py
 	${PYTHON} $<
