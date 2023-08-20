@@ -28,6 +28,9 @@ heart_c: ${BUILD_DIR}/heart_c
 ${BUILD_DIR}/heart_c: heart_c.c ${BUILD_DIR}
 	${CC} -Wall -Wextra -O1 -s $< -o $@
 
+heart_cs: heart_cs.cs
+	@echo 'Please compile and run' $<
+
 heart_elisp: heart_elisp.el
 	${EMACS} --batch --load $<
 
