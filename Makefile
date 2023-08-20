@@ -2,6 +2,8 @@ BUILD_DIR ?= build
 
 CC ?= gcc
 EMACS ?= emacs
+JAVA ?= java
+JAVAC ?= javac
 LATEX ?= pdflatex
 LUA ?= lua
 PYTHON ?= python
@@ -28,6 +30,12 @@ ${BUILD_DIR}/heart_c: heart_c.c ${BUILD_DIR}
 
 heart_elisp: heart_elisp.el
 	${EMACS} --batch --load $<
+
+heart_java: ${BUILD_DIR}/heart_java.class
+	${JAVA} -cp ${BUILD_DIR} heart_java
+
+${BUILD_DIR}/heart_java.class: heart_java.java
+	${JAVAC} -d ${BUILD_DIR} heart_java.java
 
 heart_latex: ${BUILD_DIR}/heart_latex.pdf
 	xdg-open $<
