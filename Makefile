@@ -2,6 +2,7 @@ BUILD_DIR ?= build
 
 CC ?= gcc
 EMACS ?= emacs
+GO ?= go
 JAVA ?= java
 JAVAC ?= javac
 LATEX ?= pdflatex
@@ -33,6 +34,9 @@ heart_cs: heart_cs.cs
 
 heart_elisp: heart_elisp.el
 	${EMACS} --batch --load $<
+
+heart_go: heart_go.go
+	${GO} run $<
 
 heart_java: ${BUILD_DIR}/heart_java.class
 	${JAVA} -cp ${BUILD_DIR} heart_java
