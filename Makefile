@@ -56,6 +56,9 @@ ${BUILD_DIR}/heart_latex.pdf: heart_latex.tex ${BUILD_DIR}
 heart_lua: heart_lua.lua
 	${LUA} $<
 
+heart_matlab: heart_matlab.m
+	@echo "run $< with MATLAB"
+
 heart_python: heart_python.py
 	${PYTHON} $<
 
