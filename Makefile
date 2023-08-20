@@ -8,6 +8,7 @@ JAVAC ?= javac
 LATEX ?= pdflatex
 LUA ?= lua
 PYTHON ?= python
+RUBY ?= ruby
 RUSTC ?= rustc
 
 ALL_SRC = $(wildcard heart*.*)
@@ -57,6 +58,9 @@ heart_lua: heart_lua.lua
 
 heart_python: heart_python.py
 	${PYTHON} $<
+
+heart_ruby: heart_ruby.rb
+	${RUBY} $<
 
 heart_rust: ${BUILD_DIR}/heart_rust
 	$<
